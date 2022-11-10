@@ -20,6 +20,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.android.navigation.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -28,5 +29,13 @@ class MainActivity : AppCompatActivity() {
         @Suppress("UNUSED_VARIABLE")
         // get the binding class from the lay out
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        // ktx way of finding navController
+        val navController = this.findNavController(R.id.NavHostFragment)
+        NavigationUI.setupActionBarWithNavController(this, navController)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = this.findNavController(R.id.NavHostFragment)
+        return navController.navigateUp()
     }
 }
