@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.android.navigation.databinding.FragmentTitleBinding
 
 /**
@@ -22,7 +24,19 @@ class TitleFragment : Fragment() {
 
         // inflate manually
         val binding: FragmentTitleBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_title, container, false) // false to prevent it from being attached to the ViewGroup
+            DataBindingUtil.inflate(inflater, R.layout.fragment_title, container,
+                false) // false to prevent it from being attached to the ViewGroup
+
+        binding.playButton.setOnClickListener(
+            Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_gameFragment)
+        )
+//
+//                view: View ->
+//
+//            // Navigation.findNavController(view).navigate(R.id.action_titleFragment_to_gameFragment)
+//            // Using ktx
+//            view.findNavController().navigate(R.id.action_titleFragment_to_gameFragment)
+//        }
         return binding.root
     }
 }
