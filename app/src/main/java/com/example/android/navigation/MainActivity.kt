@@ -20,6 +20,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -43,6 +45,20 @@ class MainActivity : AppCompatActivity() {
         // ktx way of finding navController
         val navController = this.findNavController(R.id.NavHostFragment)
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
+
+        // block the drawer from coming out after navigating away from the start destiantion
+        navController.addOnDestinationChangedListener{ nc: NavController, nd: NavDestination, args: Bundle? ->
+            // lock the drawer layout when we are not at the start destiantion
+
+            if (nd.id == nc.graph.startDestination) {
+                // unclock drawer when we're at the start destination
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            } else {
+                // lock nd close the drawer when in other destination
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            }
+        }
+
         NavigationUI.setupWithNavController(binding.navView, navController) // setup to know about the navigation view
     }
 
