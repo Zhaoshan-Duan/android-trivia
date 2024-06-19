@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.android.navigation.databinding.FragmentGameOverBinding
 import org.jojo.trivia.databinding.FragmentGameOverBinding
 
 class GameOverFragment : Fragment() {
