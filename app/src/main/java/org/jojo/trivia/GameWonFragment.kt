@@ -38,13 +38,13 @@ class GameWonFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.winner_menu, menu)
 
-        if (null == getShareIntent().resolveActivity(activity!!.packageManager)) {
+        if (null == getShareIntent().resolveActivity(requireActivity().packageManager)) {
             menu.findItem(R.id.share)?.setVisible(false)
         }
     }
 
     private fun getShareIntent(): Intent {
-        var args = GameWonFragmentArgs.fromBundle(arguments!!)
+        var args = GameWonFragmentArgs.fromBundle(requireArguments())
 
         return ShareCompat.IntentBuilder.from(requireActivity())
             .setText(getString(R.string.share_success_text, args.numCorrect, args.numQuestions))
